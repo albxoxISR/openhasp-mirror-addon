@@ -1,0 +1,212 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #1c1c1c;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #252525;
+  border-bottom: 1px solid #333;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #03a9f4;
+}
+
+.status-ok { color: #4caf50; font-size: 13px; }
+.status-err { color: #f44336; font-size: 13px; }
+
+/* ── Grid ───────────────────────────────────────────────────────────────── */
+
+.plate-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 24px;
+  justify-content: center;
+}
+
+/* ── Card ───────────────────────────────────────────────────────────────── */
+
+.plate-card {
+  background: #2a2a2a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
+}
+
+.plate-card:hover {
+  box-shadow: 0 4px 16px rgba(3,169,244,.25);
+}
+
+.plate-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #333;
+}
+
+.card-header .plate-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+}
+
+.card-header .plate-info {
+  font-size: 11px;
+  color: #888;
+}
+
+/* ── Screen container ───────────────────────────────────────────────────── */
+
+.screen-wrap {
+  position: relative;
+  cursor: crosshair;
+  line-height: 0;
+  background: #111;
+}
+
+.screen-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  image-rendering: auto;
+}
+
+/* Touch overlay — sits on top of image, captures mouse events */
+.touch-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2;
+}
+
+/* Highlight box — shows interactive object on hover */
+.highlight-box {
+  position: absolute;
+  border: 2px solid rgba(3, 169, 244, 0.6);
+  background: rgba(3, 169, 244, 0.1);
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 3;
+  display: none;
+  transition: left 0.05s, top 0.05s, width 0.05s, height 0.05s;
+}
+
+.highlight-box.active { display: block; }
+
+/* Touch indicator dot */
+.touch-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(3, 169, 244, 0.5);
+  border: 2px solid #03a9f4;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 3;
+  display: none;
+}
+
+.touch-dot.active { display: block; }
+
+/* ── Card footer ────────────────────────────────────────────────────────── */
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: #2a2a2a;
+  font-size: 11px;
+  color: #666;
+}
+
+.card-footer .update-info {
+  color: #888;
+}
+
+.card-footer .plate-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-footer .status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4caf50;
+}
+
+.card-footer .status-dot.offline {
+  background: #f44336;
+  animation: pulse-offline 1.5s ease-in-out infinite;
+}
+
+.card-footer .status-dot.conn-lost {
+  background: #ff9800;
+  animation: pulse-offline 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-offline {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── Plate offline state ─────────────────────────────────────────────── */
+
+.plate-card.plate-offline {
+  box-shadow: 0 0 12px rgba(244, 67, 54, 0.4);
+}
+
+.plate-card.plate-offline .screen-wrap {
+  opacity: 0.4;
+}
+
+.plate-card.plate-offline .card-header {
+  border-bottom: 2px solid #f44336;
+}
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+.empty-state p + p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* ── Auto-discovered badge ─────────────────────────────────────────────── */
+
+.badge {
+  font-size: 9px;
+  background: #03a9f4;
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 6px;
+}

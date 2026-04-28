@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>openHASP Mirror</title>
+  <link rel="icon" type="image/png" href="{{ base_path }}/static/favicon.png">
+  <link rel="stylesheet" href="{{ base_path }}/static/style.css?v={{ version }}">
+</head>
+<body>
+  <header>
+    <h1>openHASP Mirror</h1>
+    <span id="status" class="status-ok">Connected</span>
+  </header>
+
+  <div id="plate-grid" class="plate-grid">
+    <!-- Plate cards injected by JS -->
+  </div>
+
+  <div id="empty-state" class="empty-state" style="display:none">
+    <p>No plates configured.</p>
+    <p>Add plates in the addon configuration, or plates will be auto-discovered via MQTT.</p>
+  </div>
+
+  <script>
+    window.BASE_PATH = {{ base_path|tojson }};
+  </script>
+  <script src="{{ base_path }}/static/app.js?v={{ version }}"></script>
+</body>
+</html>
